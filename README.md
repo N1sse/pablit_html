@@ -10,7 +10,7 @@
 | 2025-06-20 | `edf1dd5` | Merge branch 'jimena_egly' | N1sse |
 | 2025-06-20 | `6a0517a` | WIP on master: 838a123 Agregando los commits de otras branch que no sea la rama del  master/main | N1sse |
 | 2025-06-20 | `7d52637` | index on master: 838a123 Agregando los commits de otras branch que no sea la rama del  master/main | N1sse |
-| 2025-06-11 | `c700d6d` | se creo la clase ReportController (Esta clase la Jimena, pero la subio leyder. Esto se debe a que Jimena no tenía Internet ese día)| XxleyderBetaxX |
+| 2025-06-11 | `c700d6d` | se creo la clase ReportController (Esta clase la hizo Jimena, pero la subio leyder. Esto se debe a que Jimena no tenía Internet ese día)| XxleyderBetaxX |
 | 2025-06-11 | `d31ef8b` | se creo la clase FriendsController,FriendsRepostory,FriendsServices,Friends y se creo una tabla de amigos en la base de datos | XxleyderBetaxX |
 | 2025-06-11 | `4173090` | Se creo la tabla User para almacenar datos del usuario, el modulo usuario en este caso registra los datos ingresados como username,password,age,height y peso. Maneja un id autoincremental por lo que el usuario no debe de escribir un id al registrarse. El controller busca un usuario por username ademas de permitir hacer post de nuevos usuarios y modificar usuarios. Todo esto es realizado con una base de datos remota | PabloGCalderon |
 | 2025-06-04 | `835a5ea` | Primer push a mi rama para hacer un test | PabloGCalderon |
