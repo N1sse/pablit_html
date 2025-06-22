@@ -1,22 +1,39 @@
 package ac.cr.ucr.pablit_html.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_Friends")
-
 public class Friends {
 
-   @Id
-   private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
     private String age;
     private String sex;
     private Integer level;
+
+
+    @ManyToOne
+    @JoinColumn(name = "request_id")
+    @JsonIgnore
+    private Request request;  // Un amigo esta en una solicitud
+
+
+    public Friends() {
+    }
+
+    public Friends(Integer id, String name, String age, String sex, Integer level) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.level = level;
+    }
 
     // Getters y setters
     public Integer getId() {
@@ -58,4 +75,8 @@ public class Friends {
     public void setLevel(Integer level) {
         this.level = level;
     }
+
+    public Request getRequest() { return request; }
+
+    public void setRequest(Request request) { this.request = request;}
 }

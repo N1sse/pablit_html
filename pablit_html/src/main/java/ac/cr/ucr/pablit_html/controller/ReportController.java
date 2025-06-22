@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
-
+/*
     @Autowired
     private UserService userService;
 
@@ -32,7 +32,7 @@ public class ReportController {
         try {
             Map<String, Object> report = new HashMap<>();
 
-            report.put("users", userService.findAllUser());
+           // report.put("users", userService.findAllUser());
 
             return ResponseEntity.ok(report);
 
@@ -83,5 +83,5 @@ public class ReportController {
 //    public interface UserRepository extends JpaRepository<User, Integer> {
 //        List<User> findByLevel(Integer level);
 
-
+*/
 }
