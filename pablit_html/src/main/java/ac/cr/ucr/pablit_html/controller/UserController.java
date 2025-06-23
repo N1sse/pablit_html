@@ -1,5 +1,6 @@
 package ac.cr.ucr.pablit_html.controller;
 
+import ac.cr.ucr.pablit_html.model.DTO.UserLoginDTO;
 import ac.cr.ucr.pablit_html.model.User;
 import ac.cr.ucr.pablit_html.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,8 @@ public class UserController
             return ResponseEntity.status(HttpStatus.CONFLICT).body("El username "+ user.getUsername()+" ya se encuentra en uso");
         }
 
+        user.setId(null);
+        user.setLevel(1);
         User userAdd=this.userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdd);
     }
@@ -83,5 +86,15 @@ public class UserController
             }
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario con el ID "+id+" no se encuentra registrado");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserLoginDTO loginDTO) {
+        Optional<User> user = userService.loginByUsername(loginDTO.getUsername(), loginDTO.getPassword());
+        if (user.isPresent()) {
+            return ResponseEntity.ok("Bienvenido a la web Pablit, su asistente que le motivara a tener una vida mas sana");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales invalidas");
+        }
     }
 }

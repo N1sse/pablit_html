@@ -43,4 +43,9 @@ public class UserService
         return userRepository.findByUsername(username);
     }
 
+    public Optional<User> loginByUsername(String username, String password)
+    {
+        return userRepository.findByUsernameAndPassword(username,password);
+    }
+
 }
