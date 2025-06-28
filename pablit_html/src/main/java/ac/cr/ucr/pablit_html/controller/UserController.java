@@ -1,5 +1,6 @@
 package ac.cr.ucr.pablit_html.controller;
 
+import ac.cr.ucr.pablit_html.model.DTO.LevelUpDTO;
 import ac.cr.ucr.pablit_html.model.DTO.UserLoginDTO;
 import ac.cr.ucr.pablit_html.model.User;
 import ac.cr.ucr.pablit_html.service.UserService;
@@ -90,11 +91,41 @@ public class UserController
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO loginDTO) {
-        Optional<User> user = userService.loginByUsername(loginDTO.getUsername(), loginDTO.getPassword());
-        if (user.isPresent()) {
-            return ResponseEntity.ok("Bienvenido a la web Pablit, su asistente que le motivara a tener una vida mas sana");
+        Optional<User> userOp = userService.loginByUsername(loginDTO.getUsername(), loginDTO.getPassword());
+        if (userOp.isPresent()) {
+            User user = userOp.get();
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", user.getId());
+            response.put("username", user.getUsername());
+            response.put("level", user.getLevel());
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales invalidas");
         }
+    }
+
+    @PutMapping("/levelUp/{id}")
+    public ResponseEntity<?> levelUp(@Validated @PathVariable Integer id, @RequestBody LevelUpDTO levelUpDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }
+
+        Optional<User> userOp = userService.findByIDUser(id);
+        if (userOp.isPresent()) {
+            if (!id.equals(levelUpDTO.getId())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("El id de búsqueda no coincide con el ID del DTO");
+            } else {
+                User userUpdated = userService.levelUp(id);
+                return ResponseEntity.ok(userUpdated);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("El usuario con el ID " + id + " no fue encontrado");
     }
 }
