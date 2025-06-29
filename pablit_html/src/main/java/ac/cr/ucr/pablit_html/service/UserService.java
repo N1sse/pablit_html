@@ -8,12 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-<<<<<<< HEAD
-public class UserService {
-=======
+
 public class UserService
 {
->>>>>>> origin/jimena_egly
 
     @Autowired
     private UserRepository userRepository;
@@ -31,27 +28,22 @@ public class UserService
 
     public User putUser(Integer id, User userEdit) {
         Optional<User> userOp = this.userRepository.findById(id);
-<<<<<<< HEAD
         if (userOp.isPresent()) {
-=======
-        if(userOp.isPresent())
-        {
->>>>>>> origin/jimena_egly
             userEdit.setPassword(userOp.get().getPassword());
             userEdit.setLevel(userOp.get().getLevel());
 
             User user = userOp.get();
-<<<<<<< HEAD
             user = userEdit;
-=======
-            user=userEdit;
->>>>>>> origin/jimena_egly
             return this.userRepository.save(user);
         }
         return null;
     }
-<<<<<<< HEAD
- public Optional<User> loginByUsername(String username, String password) {
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Optional<User> loginByUsername(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
     }
 
@@ -67,12 +59,5 @@ public class UserService
         return null;
     }
 
+ }
 
-=======
-    public Optional<User> findByUsername(String username)
-    {
-        return userRepository.findByUsername(username);
-    }
-
->>>>>>> origin/jimena_egly
-}

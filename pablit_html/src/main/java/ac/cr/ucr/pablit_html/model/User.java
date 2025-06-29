@@ -1,22 +1,23 @@
 package ac.cr.ucr.pablit_html.model;
 
-<<<<<<< HEAD
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-=======
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
->>>>>>> origin/jimena_egly
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 
     @Id
-<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "username", nullable = false, length = 25)
     private String username;
@@ -30,31 +31,30 @@ public class User {
     private int age;
     @Column(name = "sex", nullable = false, length = 25)
     private String sex;
+    @Column(name = "rol", nullable = false, length = 25)
     private  String rol;
 
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Request> sentRequests;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Request> receivedRequests;
+
+    @JsonBackReference("user-friends")
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friends> friends;
+
     public User()
     {
     }
 
-    public User(int id, String username, String password, double weight, int level, int age, String sex,String rol) {
-=======
-    @GeneratedValue
-    private int id;
-
-    private String username;
-    private String password;
-    private double weight;
-    private int level;
-    private int age;
-    private String sex;
-
-    public User()
-    {
-        this.id=0;
-    }
 
     public User(int id, String username, String password, double weight, int level, int age, String sex) {
->>>>>>> origin/jimena_egly
+
         this.id = id;
         this.username = username;
         this.password = password;
@@ -62,24 +62,16 @@ public class User {
         this.level = level;
         this.age = age;
         this.sex = sex;
-<<<<<<< HEAD
+
         this.rol = rol;
     }
+
 
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
-=======
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
->>>>>>> origin/jimena_egly
         this.id = id;
     }
 
@@ -130,13 +122,33 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
-<<<<<<< HEAD
+
     public String getRol() {   return rol;   }
 
     public void setRol(String rol) {  this.rol = rol;  }
-=======
 
+    public List<Friends> getFriends() {
+        return friends;
+    }
 
->>>>>>> origin/jimena_egly
+    public void setFriends(List<Friends> friends) {
+        this.friends = friends;
+    }
+
+    public List<Request> getSentRequests() {
+        return sentRequests;
+    }
+
+    public void setSentRequests(List<Request> sentRequests) {
+        this.sentRequests = sentRequests;
+    }
+
+    public List<Request> getReceivedRequests() {
+        return receivedRequests;
+    }
+
+    public void setReceivedRequests(List<Request> receivedRequests) {
+        this.receivedRequests = receivedRequests;
+    }
 }
 

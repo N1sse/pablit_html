@@ -4,7 +4,10 @@ package ac.cr.ucr.pablit_html.service;
 import ac.cr.ucr.pablit_html.model.Friends;
 import ac.cr.ucr.pablit_html.model.User;
 import ac.cr.ucr.pablit_html.repository.FriendsRepository;
+import ac.cr.ucr.pablit_html.repository.RequestRepository;
 import ac.cr.ucr.pablit_html.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ public class AdminServices {
     private FriendsRepository friendsRepository;
     @Autowired
     private  UserRepository userRepository;
+    @Autowired
+    private RequestRepository requestRepository;
 
 
 
@@ -43,9 +48,25 @@ public class AdminServices {
         }
 
 
-        public void deleteUserById(Integer id) {
+    @Transactional
+    public void deleteUserById(Integer id) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+
+            // Eliminar solicitudes enviadas y recibidas
+            requestRepository.deleteAllBySender(user);
+            requestRepository.deleteAllByReceiver(user);
+
+            // Eliminar amigos
+            friendsRepository.deleteAllByUser(user);
+
+            // Finalmente eliminar usuario
             userRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Usuario no encontrado");
         }
+    }
 
     public User editarUser(Integer id, User userEdit) {
         Optional<User> userOp = userRepository.findById(id);

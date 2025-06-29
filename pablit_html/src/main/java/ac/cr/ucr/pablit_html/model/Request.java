@@ -1,5 +1,8 @@
 package ac.cr.ucr.pablit_html.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 
@@ -23,8 +26,10 @@ public class Request{
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
+    @JsonBackReference("request-friends")
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     private List<Friends> friends;
+
     @Column(name = "friend_count", nullable = false) //Columna para la cantidad de amigos
     private int friendCount;
 

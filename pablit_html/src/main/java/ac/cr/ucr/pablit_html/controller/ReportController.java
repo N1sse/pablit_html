@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
-/*
+
     @Autowired
     private ReportService reportService;
 
@@ -28,18 +28,11 @@ public class ReportController {
         return this.reportService.findAllUsers();
     }
 
-    @GetMapping
-    public List<Friends> findAllFriends(){
-        return this.reportService.findAllFriends();
-    }
 
-<<<<<<< HEAD
-           // report.put("users", userService.findAllUser());
-=======
     @GetMapping("/{username}")
     public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         Optional<User> user = reportService.findUserByUsername(username);
->>>>>>> origin/jimena_egly
+
 
         if(!user.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -47,6 +40,7 @@ public class ReportController {
         }
         return ResponseEntity.ok(user.get());
     }
+
 
 
     @GetMapping("/findByLevel/{level}")
@@ -67,7 +61,4 @@ public class ReportController {
     }
 
 
-
-
-*/
 }

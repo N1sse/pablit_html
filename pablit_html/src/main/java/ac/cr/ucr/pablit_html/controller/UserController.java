@@ -1,10 +1,8 @@
 package ac.cr.ucr.pablit_html.controller;
 
-<<<<<<< HEAD
+
 import ac.cr.ucr.pablit_html.model.DTO.LevelUpDTO;
 import ac.cr.ucr.pablit_html.model.DTO.UserLoginDTO;
-=======
->>>>>>> origin/jimena_egly
 import ac.cr.ucr.pablit_html.model.User;
 import ac.cr.ucr.pablit_html.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class UserController
         return ResponseEntity.ok(user);
     }
 
-<<<<<<< HEAD
+
     @GetMapping("/userById/{id}")
     public ResponseEntity<?> getUser(@PathVariable Integer id)
     {
@@ -51,8 +49,6 @@ public class UserController
         return ResponseEntity.ok(user);
     }
 
-=======
->>>>>>> origin/jimena_egly
     @PostMapping
     public ResponseEntity<?> addUser(@Validated @RequestBody User user, BindingResult result)
     {
@@ -72,12 +68,10 @@ public class UserController
             return ResponseEntity.status(HttpStatus.CONFLICT).body("El username "+ user.getUsername()+" ya se encuentra en uso");
         }
 
-<<<<<<< HEAD
         user.setId(null);
         user.setLevel(1);
         user.setRol("user");
-=======
->>>>>>> origin/jimena_egly
+
         User userAdd=this.userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdd);
     }
@@ -109,7 +103,7 @@ public class UserController
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario con el ID "+id+" no se encuentra registrado");
     }
-<<<<<<< HEAD
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO loginDTO) {
@@ -150,6 +144,5 @@ public class UserController
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("El usuario con el ID " + id + " no fue encontrado");
     }
-=======
->>>>>>> origin/jimena_egly
+
 }
