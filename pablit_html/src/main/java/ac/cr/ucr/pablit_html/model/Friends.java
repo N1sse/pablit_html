@@ -15,7 +15,7 @@ public class Friends {
     private String name;
     private String age;
     private String sex;
-    private Integer level;
+    //private Integer level;
 
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class Friends {
         this.name = name;
         this.age = age;
         this.sex = sex;
-        this.level = level;
+        //this.level = level;
     }
 
     // Getters y setters
@@ -68,13 +68,13 @@ public class Friends {
         this.sex = sex;
     }
 
-    public Integer getLevel() {
+   /* public Integer getLevel() {
         return level;
     }
 
     public void setLevel(Integer level) {
         this.level = level;
-    }
+    }*/
 
     public Request getRequest() { return request; }
 

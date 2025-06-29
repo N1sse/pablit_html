@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserService
-{
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -27,20 +26,35 @@ public class UserService
 
     public User putUser(Integer id, User userEdit) {
         Optional<User> userOp = this.userRepository.findById(id);
-        if(userOp.isPresent())
-        {
+        if (userOp.isPresent()) {
             userEdit.setPassword(userOp.get().getPassword());
             userEdit.setLevel(userOp.get().getLevel());
 
             User user = userOp.get();
-            user=userEdit;
+            user = userEdit;
             return this.userRepository.save(user);
         }
         return null;
     }
-    public Optional<User> findByUsername(String username)
-    {
+
+    public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Optional<User> loginByUsername(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    public User levelUp(Integer id) {
+        Optional<User> userOp = userRepository.findById(id);
+
+        if (userOp.isPresent()) {
+            User user = userOp.get();
+            user.setLevel(user.getLevel() + 1);
+            return userRepository.save(user);
+        }
+
+        return null;
     }
 
 }

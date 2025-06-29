@@ -1,28 +1,31 @@
 package ac.cr.ucr.pablit_html.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private Integer id;
 
+    @Column(name = "username", nullable = false, length = 25)
     private String username;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "weight", nullable = false)
     private double weight;
+    @Column(name = "level", nullable = true)
     private int level;
+    @Column(name = "age", nullable = false, length = 10)
     private int age;
+    @Column(name = "sex", nullable = false, length = 25)
     private String sex;
 
     public User()
     {
-        this.id=0;
     }
 
     public User(int id, String username, String password, double weight, int level, int age, String sex) {
@@ -35,11 +38,11 @@ public class User {
         this.sex = sex;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
