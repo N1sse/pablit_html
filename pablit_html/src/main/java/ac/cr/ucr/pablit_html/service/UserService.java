@@ -36,12 +36,7 @@ public class UserService {
         }
         return null;
     }
-
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public Optional<User> loginByUsername(String username, String password) {
+ public Optional<User> loginByUsername(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
     }
 
@@ -56,5 +51,6 @@ public class UserService {
 
         return null;
     }
+
 
 }

@@ -8,8 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Integer id;
+    private int id;
 
     @Column(name = "username", nullable = false, length = 25)
     private String username;
@@ -23,12 +22,13 @@ public class User {
     private int age;
     @Column(name = "sex", nullable = false, length = 25)
     private String sex;
+    private  String rol;
 
     public User()
     {
     }
 
-    public User(int id, String username, String password, double weight, int level, int age, String sex) {
+    public User(int id, String username, String password, double weight, int level, int age, String sex,String rol) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -36,6 +36,7 @@ public class User {
         this.level = level;
         this.age = age;
         this.sex = sex;
+        this.rol = rol;
     }
 
     public Integer getId() {
@@ -93,7 +94,8 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+    public String getRol() {   return rol;   }
 
-
+    public void setRol(String rol) {  this.rol = rol;  }
 }
 

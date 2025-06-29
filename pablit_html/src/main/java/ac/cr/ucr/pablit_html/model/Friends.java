@@ -5,37 +5,34 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_Friends")
+@Table(name = "tb_friends")
 public class Friends {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-    private String age;
-    private String sex;
-    //private Integer level;
-
-
+    //Asociación a la Request
     @ManyToOne
-    @JoinColumn(name = "request_id")
+       @JoinColumn(name = "request_id", nullable = false)
     @JsonIgnore
-    private Request request;  // Un amigo esta en una solicitud
+    private Request request;
 
+    // Asociación al usuario
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
 
-    public Friends() {
+    private User user;
+
+    public Friends() {}
+
+    public Friends(Request request, User user) {
+        this.request = request;
+        this.user = user;
     }
 
-    public Friends(Integer id, String name, String age, String sex, Integer level) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-        //this.level = level;
-    }
 
-    // Getters y setters
+
     public Integer getId() {
         return id;
     }
@@ -44,39 +41,19 @@ public class Friends {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Request getRequest() {
+        return request;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
-    public String getAge() {
-        return age;
+    public User getUser() {
+        return user;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-   /* public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }*/
-
-    public Request getRequest() { return request; }
-
-    public void setRequest(Request request) { this.request = request;}
 }
