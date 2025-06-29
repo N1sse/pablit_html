@@ -1,31 +1,27 @@
-# Stage 1: Build the application
+# Stage 1: Build the application with Maven + JDK
+FROM maven:3.9.4-eclipse-temurin-21 AS builder
 
-FROM eclipse-temurin:21-jdk AS builder
-
-# Set the working directory
 WORKDIR /app
 
-# Copy the application code
-COPY . .
+# Copiamos sólo el pom.xml para aprovechar caché de dependencias
+COPY pom.xml .
 
-# Give execution permissions to the Maven wrapper script
-RUN chmod +x mvnw
+# Copiamos el código fuente
+COPY src ./src
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+# Compilamos y generamos el JAR (sin ejecutar tests para agilizar)
+RUN mvn clean package -DskipTests
 
-
-# Stage 2: Run the application
+# Stage 2: Ejecutar la aplicación con JRE
 FROM eclipse-temurin:21-jre
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the JAR file from the builder stage
+# Copiamos el JAR generado en el build previo
 COPY --from=builder /app/target/*jar app.jar
 
-# Expose the port the app will run
+# Exponemos el puerto 8080
 EXPOSE 8080
 
-# Command to run the application
-ENTRYPOINT ["java","-jar","app.jar"]
+# Comando para ejecutar la app
+ENTRYPOINT ["java", "-jar", "app.jar"]
