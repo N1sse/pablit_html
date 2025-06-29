@@ -36,6 +36,17 @@ public class UserController
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/userById/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Integer id)
+    {
+        Optional<User> user =  this.userService.findByIDUser(id);
+        if(!user.isPresent())
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario con el id " + id + " No fue encontrado");
+        }
+        return ResponseEntity.ok(user);
+    }
+
     @PostMapping
     public ResponseEntity<?> addUser(@Validated @RequestBody User user, BindingResult result)
     {
