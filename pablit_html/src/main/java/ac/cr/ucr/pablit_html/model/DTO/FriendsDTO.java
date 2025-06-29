@@ -2,14 +2,17 @@ package ac.cr.ucr.pablit_html.model.DTO;
 
 
 //clase para recibirel nombre de el receptor y emisor de la solicitud
-public class FriendRequestDTO {
-    private String senderUsername;
-    private String receiverUsername;
+public class FriendsDTO {
+    private String senderUsername;   // Usuario que envió la solicitud
+    private String receiverUsername; // Usuario que recibió la solicitud
+    private Integer friendId;        // Id del objeto Friends o relación
 
-    public FriendRequestDTO(String senderUsername, String receiverUsername) {
+    public FriendsDTO(String senderUsername, String receiverUsername, Integer friendId) {
         this.senderUsername = senderUsername;
         this.receiverUsername = receiverUsername;
+        this.friendId = friendId;
     }
+
 
     public String getSenderUsername() {
         return senderUsername;
@@ -25,5 +28,13 @@ public class FriendRequestDTO {
 
     public void setReceiverUsername(String receiverUsername) {
         this.receiverUsername = receiverUsername;
+    }
+
+    public Integer getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Integer friendId) {
+        this.friendId = friendId;
     }
 }

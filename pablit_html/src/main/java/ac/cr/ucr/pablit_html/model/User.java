@@ -16,13 +16,14 @@ public class User {
     private int level;
     private int age;
     private String sex;
+    private  String rol;
 
     public User()
     {
         this.id=0;
     }
 
-    public User(int id, String username, String password, double weight, int level, int age, String sex) {
+    public User(int id, String username, String password, double weight, int level, int age, String sex,String rol) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,6 +31,7 @@ public class User {
         this.level = level;
         this.age = age;
         this.sex = sex;
+        this.rol = rol;
     }
 
     public int getId() {
@@ -87,7 +89,8 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+    public String getRol() {   return rol;   }
 
-
+    public void setRol(String rol) {  this.rol = rol;  }
 }
 

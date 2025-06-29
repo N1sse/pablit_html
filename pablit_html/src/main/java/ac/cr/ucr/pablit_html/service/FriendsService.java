@@ -53,7 +53,7 @@ public class FriendsService {
         friendsRepository.deleteById(id);
     }
     public boolean friendExist(User sender, User receiver) {
-        return friendsRepository.findFriend(receiver, sender).isPresent();
+        return friendsRepository.findByUserAndRequest_Sender(receiver, sender).isPresent();
     }
 
 

@@ -1,7 +1,7 @@
 package ac.cr.ucr.pablit_html.controller;
 
 
-import ac.cr.ucr.pablit_html.model.DTO.FriendRequestDTO;
+import ac.cr.ucr.pablit_html.model.DTO.FriendsDTO;
 import ac.cr.ucr.pablit_html.model.Friends;
 import ac.cr.ucr.pablit_html.model.Request;
 import ac.cr.ucr.pablit_html.model.User;
@@ -30,7 +30,7 @@ public class FriendsController {
     private RequestService requestService;
 
     @PostMapping
-      public ResponseEntity<?> addFriendByUsername(@RequestBody FriendRequestDTO dto) {
+      public ResponseEntity<?> addFriendByUsername(@RequestBody FriendsDTO dto) {
         try {
             if (dto.getSenderUsername() == null || dto.getReceiverUsername() == null) {
                   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Debe enviar ambos usernames.");
@@ -106,15 +106,25 @@ public class FriendsController {
             List<Friends> all = friendsService.findAllFriends();
 
             if (all.isEmpty()) {
-                return
-                        ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay amigos registrados.");
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay amigos registrados.");
             }
 
-            return ResponseEntity.ok(all);
+            List<FriendsDTO> friendsList = new ArrayList<>();
+
+            for (Friends friend : all) {
+                friendsList.add(new FriendsDTO(
+                        friend.getRequest().getSender().getUsername(),
+                        friend.getRequest().getReceiver().getUsername(),
+                        friend.getId()
+                ));
+            }
+
+            return ResponseEntity.ok(friendsList);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener los amigos: " + e.getMessage());
-             }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener los amigos: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
