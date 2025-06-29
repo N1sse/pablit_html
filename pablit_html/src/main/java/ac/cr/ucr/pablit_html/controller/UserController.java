@@ -68,6 +68,7 @@ public class UserController
 
         user.setId(null);
         user.setLevel(1);
+        user.setRol("user");
         User userAdd=this.userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdd);
     }
