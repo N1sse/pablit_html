@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 public class AdminLoginDTO{
 
+<<<<<<< HEAD
     private String username;
     private String password;
 
@@ -32,4 +33,6 @@ public class AdminLoginDTO{
     public void setUsername(String username) {
         this.username = username;
     }
+=======
+>>>>>>> origin/jimena_egly
 }

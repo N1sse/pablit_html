@@ -2,10 +2,14 @@ package ac.cr.ucr.pablit_html.service;
 
 
 import ac.cr.ucr.pablit_html.model.Friends;
+<<<<<<< HEAD
 import ac.cr.ucr.pablit_html.model.User;
 import ac.cr.ucr.pablit_html.repository.FriendsRepository;
 import ac.cr.ucr.pablit_html.repository.RequestRepository;
 import ac.cr.ucr.pablit_html.repository.UserRepository;
+=======
+import ac.cr.ucr.pablit_html.repository.FriendsRepository;
+>>>>>>> origin/jimena_egly
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,7 @@ public class FriendsService {
     @Autowired
     private FriendsRepository friendsRepository;
 
+<<<<<<< HEAD
     @Autowired
     private UserRepository userRepository;
 
@@ -54,6 +59,22 @@ public class FriendsService {
     }
     public boolean friendExist(User sender, User receiver) {
         return friendsRepository.findByUserAndRequest_Sender(receiver, sender).isPresent();
+=======
+    public Friends addFriends(Friends friends) {
+        return friendsRepository.save(friends);
+    }
+
+    public List<Friends> findAllFriends() {
+        return this.friendsRepository.findAll();
+    }
+
+    public Optional<Friends> findIdFriend(Integer id) {
+        return this.friendsRepository.findById(id);
+    }
+
+    public void deleteFriend(Integer id) {
+        this.friendsRepository.deleteById(id);
+>>>>>>> origin/jimena_egly
     }
 
 

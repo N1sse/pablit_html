@@ -1,6 +1,8 @@
 package ac.cr.ucr.pablit_html.controller;
 
+import ac.cr.ucr.pablit_html.model.Friends;
 import ac.cr.ucr.pablit_html.model.User;
+import ac.cr.ucr.pablit_html.service.ReportService;
 import ac.cr.ucr.pablit_html.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,69 +21,53 @@ import java.util.Optional;
 public class ReportController {
 /*
     @Autowired
-    private UserService userService;
+    private ReportService reportService;
 
     @GetMapping
-    public List<User> getAllUser(){
-        return this.userService.findAllUser();
-
+    public List<User> findAllUsers(){
+        return this.reportService.findAllUsers();
     }
 
-    @GetMapping("/reportUser")
-    public ResponseEntity<?> getUserReport() {
-        try {
-            Map<String, Object> report = new HashMap<>();
+    @GetMapping
+    public List<Friends> findAllFriends(){
+        return this.reportService.findAllFriends();
+    }
 
+<<<<<<< HEAD
            // report.put("users", userService.findAllUser());
+=======
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        Optional<User> user = reportService.findUserByUsername(username);
+>>>>>>> origin/jimena_egly
 
-            return ResponseEntity.ok(report);
-
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body(e.getMessage());
+        if(!user.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El usuario con username " + username + " no fue encontrado");
         }
+        return ResponseEntity.ok(user.get());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity <?> getUser(@PathVariable Integer id){
-        Optional<User> user= this.userService.findByIDUser(id);
-        if(user==null || user.get().getId()==0 ){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La id "+id+" que usted ingresó no existe");
 
-        }
-
-        return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/users/level/{level}")
+    @GetMapping("/findByLevel/{level}")
     public ResponseEntity<?> getUsersByLevel(@PathVariable Integer level) {
         try {
-            List<User> users = userService.findByLevel(level);
+            List<User> users = reportService.findUsersByLevel(level);
 
-            if(users.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("No hay usuarios de nivel " + level);
+            if (users.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                        .body("No existen usuarios con nivel " + level);
             }
 
             return ResponseEntity.ok(users);
 
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
 
-    //// eesto debe de ir en el service User
-    //public List<User> findByLevel(Integer level) {
-    //    // Implementación dependerá de tu repositorio/JPA
-    //    return userRepository.findByLevel(level);
-    //}
 
-    //eesto en el repository de User
-//    @Repository
-//    public interface UserRepository extends JpaRepository<User, Integer> {
-//        List<User> findByLevel(Integer level);
 
 */
 }

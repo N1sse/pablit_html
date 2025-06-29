@@ -1,12 +1,20 @@
 package ac.cr.ucr.pablit_html.model;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
+=======
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+>>>>>>> origin/jimena_egly
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 
     @Id
+<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -29,6 +37,24 @@ public class User {
     }
 
     public User(int id, String username, String password, double weight, int level, int age, String sex,String rol) {
+=======
+    @GeneratedValue
+    private int id;
+
+    private String username;
+    private String password;
+    private double weight;
+    private int level;
+    private int age;
+    private String sex;
+
+    public User()
+    {
+        this.id=0;
+    }
+
+    public User(int id, String username, String password, double weight, int level, int age, String sex) {
+>>>>>>> origin/jimena_egly
         this.id = id;
         this.username = username;
         this.password = password;
@@ -36,6 +62,7 @@ public class User {
         this.level = level;
         this.age = age;
         this.sex = sex;
+<<<<<<< HEAD
         this.rol = rol;
     }
 
@@ -44,6 +71,15 @@ public class User {
     }
 
     public void setId(Integer id) {
+=======
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+>>>>>>> origin/jimena_egly
         this.id = id;
     }
 
@@ -94,8 +130,13 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+<<<<<<< HEAD
     public String getRol() {   return rol;   }
 
     public void setRol(String rol) {  this.rol = rol;  }
+=======
+
+
+>>>>>>> origin/jimena_egly
 }
 
