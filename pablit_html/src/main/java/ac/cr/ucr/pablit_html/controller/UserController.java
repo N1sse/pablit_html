@@ -115,6 +115,9 @@ public class UserController
             response.put("id", user.getId());
             response.put("username", user.getUsername());
             response.put("level", user.getLevel());
+            response.put("age", user.getAge());
+            response.put("weight", user.getWeight());
+            response.put("sex", user.getSex());
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales invalidas");
