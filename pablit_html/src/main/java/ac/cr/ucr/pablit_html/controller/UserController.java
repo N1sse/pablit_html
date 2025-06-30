@@ -118,6 +118,7 @@ public class UserController
             response.put("age", user.getAge());
             response.put("weight", user.getWeight());
             response.put("sex", user.getSex());
+            response.put("rol", user.getRol());
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales invalidas");
